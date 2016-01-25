@@ -248,7 +248,27 @@ public class trainingActivity extends Activity {
         loghelper.stop();
     }
     
-    /** 开始记录日志文件 */
+    /** 
+     * 连续两次按回退键，退出程序。
+     * 使得下次程序执行从onCreate()开始，避免数据库初始化等问题的出现。
+     */
+    private long mPressedTime = 0;
+    @Override
+	public void onBackPressed() {
+    	long mNowTime = System.currentTimeMillis();//获取第一次按键时间
+    	if((mNowTime - mPressedTime) > 2000){//比较两次按键时间差
+    	Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+    	mPressedTime = mNowTime;
+    	}
+    	else{//退出程序
+    	   this.finish();
+    	   System.exit(0);
+    	}
+
+		// super.onBackPressed();
+	}
+
+	/** 开始记录日志文件 */
     public void onStartLog(View view) {
     	loghelper.start(Logformat);  
     	start_logfile.setEnabled(false);
@@ -299,6 +319,18 @@ public class trainingActivity extends Activity {
     	
     	// 设置记录标志
     	isRecorded = true;
+    }
+    
+    /** 清空数据表，便于重新开始填充数据库 */
+    public void onDbDelete(View view)
+    {
+    	mRssiDbManager.delAllRssiInfo();
+    	
+    	// 初始参考点默认名称
+		reference_pointNum = 1;
+		reference_point_edit.setText(reference_pointPerf+reference_pointNum); 
+		
+		Toast.makeText(this, "清空数据库！", Toast.LENGTH_SHORT).show();
     }
     
     /** 设置前台扫描周期 */

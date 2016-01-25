@@ -68,13 +68,23 @@
         android:onClick="onMonitoringStop"
         android:text="Mstop" />
     
+    <!-- 清空数据表 -->
+     <Button
+        android:id="@+id/DbDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/Mstop"
+        android:layout_toRightOf="@id/Mstop"
+        android:onClick="onDbDelete"
+        android:text="清空" />
+    
      <!-- 定位参考点名称  -->
      <EditText
         android:id="@+id/RPname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/Mstop"
-        android:layout_toRightOf="@+id/Mstop"
+        android:layout_toRightOf="@+id/DbDelete"
         android:text="rp1"
         android:ems="10"
         android:textSize="20sp" />
