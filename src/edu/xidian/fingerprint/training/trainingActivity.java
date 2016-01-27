@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 import edu.xidian.FindBeacons.FindBeacons;
@@ -357,7 +358,10 @@ public class trainingActivity extends Activity {
 	    	String dateStr = sfd.format(date);
     	    public void run() {
     	    	TextView editText = (TextView)trainingActivity.this.findViewById(R.id.monitoringText);
-       	    	editText.append(dateStr+"=="+line+"\n");            	    	    		
+       	    	editText.append(dateStr+"=="+line+"\n");  
+       	        // 滚动到底部
+       	    	ScrollView sv = (ScrollView)trainingActivity.this.findViewById(R.id.scrollView);
+       	    	sv.scrollTo(0, editText.getBottom());
     	    }
     	});
     }
